@@ -1,0 +1,25 @@
+{
+  "name": "daily_reading_from_break_out",
+  "version": "1.0.0",
+  "description": "Joel Osteen Daily Reading",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOlaw/daily_reading_from_break_out.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EOlaw/daily_reading_from_break_out/issues"
+  },
+  "homepage": "https://github.com/EOlaw/daily_reading_from_break_out#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "nodemon": "^2.0.20"
+  }
+}
