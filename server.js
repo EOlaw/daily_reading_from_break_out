@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const ejsMate = require('ejs-mate');
-const apis = require('./api/daily_reading')
+const fs = require('fs');
 
 
 
@@ -18,11 +18,22 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/img', express.static(__dirname + 'public/img')) //to load images
 
 
+const readings = JSON.parse(
+    fs.readFileSync(`${__dirname}/api/daily_reading.json`)
+)
 
+
+app.get('/api/v1/readings', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        results: readings.length,
+        data: {
+            readings
+        }
+    })
+})
 app.get('/', (req, res) => {
-    res.render('welcome', {apis: req.body})
-    const readings = apis.readings[0];
-    console.log(readings)
+    res.status(404).render('welcome')
 })
 
 const date = new Date();
