@@ -19,13 +19,29 @@ app.use('/img', express.static(__dirname + 'public/img')) //to load images
 
 
 app.get('/janay', (req, res) => {
-    res.render('janay')
+    res.render('welcome')
 })
 
 //Making JSON file readable
-const readings = JSON.parse(
-    fs.readFileSync(`${__dirname}/api/daily_reading.json`)
+const owner = JSON.parse(
+    fs.readFileSync(`${__dirname}/api/owner.json`)
 )
+const readings = JSON.parse(
+    fs.readFileSync(`${__dirname}/api/reading.json`)
+)
+
+app.get('/', (req, res) => {
+    //console.log(readings[4])
+    res.send(`
+    <h1 style="text-align:center"> ${readings[4].title} </h1>
+    <h2> Author: ${owner.author} </h2>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].motivational} </p>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].bibleChapter} </p>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].reading} </p>
+    `)
+})
+
+
 
 
 app.get('/api/v1/readings', (req, res) => {
@@ -43,7 +59,7 @@ app.post('/api/v1/readings', (req, res) => {
     const newReadings = Object.assign({ id: newId }, req.body);
 
     readings.push(newReadings);
-    fs.writeFile(`${__dirname}/api/daily_reading.json`, JSON.stringify(readings), err => {
+    fs.writeFile(`${__dirname}/api/reading.json`, JSON.stringify(readings), err => {
         res.status(201).json({
             status: 'success',
             data: { 
@@ -53,14 +69,11 @@ app.post('/api/v1/readings', (req, res) => {
     })
 })
 
-//app.get('/api/v1/readings/:id', (req, res) => {
-    //console.log(req.params)
-//})
-
-
-app.get('/', (req, res) => {
-    res.status(404).render('welcome')
+app.get('/api/v1/readings/:id', (req, res, next) => {
+    console.log(req.params)
+    next()
 })
+
 
 const date = new Date();
 console.log(date)
