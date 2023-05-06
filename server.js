@@ -33,11 +33,11 @@ const readings = JSON.parse(
 app.get('/', (req, res) => {
     //console.log(readings[4])
     res.send(`
-    <h1 style="text-align:center"> ${readings[4].title} </h1>
+    <h1 style="text-align:center"> ${readings[0].title} </h1>
     <h2> Author: ${owner.author} </h2>
-    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].motivational} </p>
-    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].bibleChapter} </p>
-    <p>  <b> Quote by ${owner.author}: </b> "${readings[4].reading} </p>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[0].motivational} </p>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[0].bibleChapter} </p>
+    <p>  <b> Quote by ${owner.author}: </b> "${readings[0].reading} </p>
     `)
 })
 
